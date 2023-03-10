@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>Products</title>
+</head>
+<body>
+<img class=”image” src="static/givetake.gif" >
+    <div style="display:flex; flex-wrap:wrap;">
+        {% for product in products %}
+            <div style="border: 1px solid black; margin: 10px; padding: 10px;">
+                {% if product['picture'] %}
+                    <img src="{{ url_for('static', filename='uploads/' + product['picture']) }}" width="100px" style="margin-right:10px;">
+                {% endif %}
+                <div>
+                    <h2>{{ product['name'] }}</h2>
+                    <p>{{ product['details'] }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <form method="GET" action="{{ url_for('add_product') }}">
+        <button type="submit">הוספת מוצר</button>
+    </form>
+</body>
+</html>

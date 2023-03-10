@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+    <title>Add Product</title>
+</head>
+<body>
+    <h1>Add Product</h1>
+    <form method="POST" action="{{ url_for('add_product') }}" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required><br><br>
+        <label for="details">Details:</label>
+        <textarea name="details" id="details" rows="5"></textarea><br><br>
+        <label for="picture">Picture:</label>
+        <input type="file" name="picture" id="picture" accept="static/image/*"><br><br>
+        <input type="submit" value="Add Product">
+    </form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <title>Products</title>
+        <style>
+
+        .imageContainer {
+           margin-left:0%;
+           display: inline-block;
+           position: relative;
+           text-align: center;
+           color: rgb(64, 11, 124);
+        }
+        .caption{
+           font-size: 20px;
+           font-weight: bolder;
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .imagecontent {
+            width: auto !important;
+        }
+        .center {
+           position: absolute;
+           top: 20%;
+           left: 20%;
+           transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="imageContainer" style="display:flex; flex-wrap:wrap;">
+        <img class=”image” src="static/givetake.png">
+         <div class="caption center">
+        {% for product in products %}
+            <div style="border: 1px solid black; margin: 10px; padding: 10px;">
+                {% if product['picture'] %}
+                    <img src="{{ url_for('static', filename='uploads/' + product['picture']) }}" width="100px" style="margin-right:10px;">
+                {% endif %}
+                <div>
+                    <h2>{{ product['name'] }}</h2>
+                    <p>{{ product['details'] }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+        </div>
+    <a href="{{ url_for('add_product') }}">Add Product</a>
+</body>
+</html>

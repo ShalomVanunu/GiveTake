@@ -1,37 +1,52 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import os
+from bson.objectid import ObjectId
+from pymongo import MongoClient
+
+
 
 app = Flask(__name__)
-DATABASE = 'products.db'
 UPLOAD_FOLDER = 'static/uploads/'
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 
-def get_db():
-    db = sqlite3.connect(DATABASE)
-    db.row_factory = sqlite3.Row
-    return db
+
+cluster = MongoClient("mongodb+srv://MongoUser:Password1@clusterdb.ekaau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = cluster['givetake']
+collection = db['products']
+print("Done")
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 @app.route('/')
 def index():
-    db = get_db()
-    products = db.execute('SELECT * FROM products').fetchall()
+    products = collection.find()
     return render_template('index.html', products=products)
 
-@app.route('/add_product', methods=['GET', 'POST'])
+@app.route('/add', methods=['GET', 'POST'])
 def add_product():
     if request.method == 'POST':
         name = request.form['name']
         details = request.form['details']
-        picture = request.files['picture']
-        filename = picture.filename
-        picture.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        db = get_db()
-        db.execute('INSERT INTO products (name, details, picture) VALUES (?, ?, ?)', (name, details, filename))
-        db.commit()
-        return redirect('/')
-    else:
-        return render_template('add_product.html')
+        picture = None
+        if 'picture' in request.files:
+            file = request.files['picture']
+            if file and allowed_file(file.filename):
+                filename = file.filename
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                picture = filename
+        product = {
+            'name': name,
+            'details': details,
+            'picture': picture
+        }
+        collection.insert_one(product)
+        return redirect(url_for('index'))
+    return render_template('add_product.html')
 
 if __name__ == '__main__':
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-  #  app.run(debug=True, port=80, host="0.0.0.0")
+    app.run(debug=True, port=80, host="0.0.0.0")

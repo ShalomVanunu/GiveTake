@@ -25,7 +25,6 @@ def allowed_file(filename):
 @app.route('/')
 def index():
     products = db.products.find()
-    print(products)
     return render_template('index.html', products=products)
 
 @app.route('/add_product', methods=['GET', 'POST'])
@@ -51,5 +50,4 @@ def picture(picture_id):
 
 if __name__ == '__main__':
     pass
-    #app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     #app.run(debug=True, port=80, host="0.0.0.0")

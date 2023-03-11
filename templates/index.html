@@ -11,10 +11,10 @@
       }
       .product {
         width: 100%;
-        height: 250px;
+        height: 200px;
         display: block;
         margin-bottom: 10px;
-        padding: 70px;
+        padding: 50px;
         border: 2px solid black;
         text-align: center;
       }
@@ -27,7 +27,7 @@
         .product {
           width: 20%;
           margin-right: 5%;
-          margin-bottom: 10%;
+          margin-bottom: 5%;
           display: inline-block;
         }
       }
@@ -36,10 +36,9 @@
   <body>
     <img class=”image” src="static/givetake.gif" >
     <br>
-    <a href="{{ url_for('add_product') }}"><button>Add Product</button></a>
-  <br>
+    <a href="{{ url_for('add_product') }}"><button style=background-color:#5ce1e6;border-color:#5ce1e6>הוסף מוצר</button></a>
+    <br>
     {% for product in products %}
-
       <div class="product">
         <p>{{ product['name'] }}</p>
         <p>{{ product['tel'] }}</p>
@@ -47,7 +46,7 @@
         {% if product['picture_id'] %}
           <img src="{{ url_for('picture', picture_id=product['picture_id']) }}" alt="{{ product['name'] }}" />
         {% endif %}
-        <br>
+
 
       </div>
     {% endfor %}

@@ -49,5 +49,6 @@ def picture(picture_id):
 
 
 if __name__ == '__main__':
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-    app.run(debug=True, port=80, host="0.0.0.0")
+    pass
+    #app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    #app.run(debug=True, port=80, host="0.0.0.0")

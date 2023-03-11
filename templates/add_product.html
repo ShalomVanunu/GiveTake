@@ -17,15 +17,16 @@
     <a href=..> <img class=”image” src="static/givetake.gif" ></a>
     <br>
     <form method="POST" action="{{ url_for('add_product') }}" enctype="multipart/form-data">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required><br><br>
-        <label for="details">Details:</label>
-        <textarea name="details" id="details" rows="5"></textarea><br><br>
-        <label for="tel">Tel Num:</label>
-        <input type="text" name="tel" id="tel" required><br><br>
-        <label for="picture">Picture:</label>
-        <input type="file" name="picture" id="picture" accept="static/image/*"><br><br>
-        <input type="submit" value="Add Product">
+        <input type="text" name="name" id="name" required>
+        <label for="name">שם מלא</label><br><br>
+        <textarea name="details" id="details" rows="5"></textarea>
+        <label for="details">פרטים על המוצר</label><br><br>
+        <input type="text" name="tel" id="tel" required>
+        <label for="tel">מספר טלפון</label><br><br>
+        <input type="file" name="picture" id="picture" accept="static/image/*">
+        <label for="picture">הוסף תמונה</label><br><br>
+        <input type="submit" style=background-color:#5ce1e6;border-color:#5ce1e6 value="הוסף מוצר">
+    <br>
     </form>
 </body>
 </html>

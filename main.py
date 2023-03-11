@@ -34,8 +34,9 @@ def add_product():
         name = request.form['name']
         details = request.form['details']
         picture = request.files['picture']
+        tel = request.form['tel']
         picture_id = fs.put(picture, content_type=picture.content_type, filename=picture.filename)
-        db.products.insert_one({'name': name, 'details': details, 'picture_id': picture_id})
+        db.products.insert_one({'name': name, 'details': details,'tel': tel, 'picture_id': picture_id})
         return redirect(url_for('index'))
     else:
         return render_template('add_product.html')

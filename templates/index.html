@@ -41,11 +41,12 @@
     {% for product in products %}
 
       <div class="product">
-        <h2>{{ product['name'] }}</h2>
+        <p>{{ product['name'] }}</p>
+        <p>{{ product['tel'] }}</p>
+        <p>{{ product['details'] }}</p>
         {% if product['picture_id'] %}
           <img src="{{ url_for('picture', picture_id=product['picture_id']) }}" alt="{{ product['name'] }}" />
         {% endif %}
-        <p>{{ product['details'] }}</p>
         <br>
 
       </div>
